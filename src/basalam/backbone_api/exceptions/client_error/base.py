@@ -66,6 +66,8 @@ class ClientErrorException(HTTPException):
 
     @property
     def message(self) -> str:
+        if self.errors and self.errors[0].message:
+            return self.errors[0].message
         return HTTPStatus(self.http_status).phrase
 
     @property
